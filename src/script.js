@@ -5,28 +5,26 @@ let dragNote;
 let dragObj;
 let dragIndex;
 
+if (localStorage.getItem('notes')) {
+    notesArr = JSON.parse(localStorage.getItem('notes'));
+}
+
+function Note(x=50, y=100, text) {
+    this.x = x;
+    this.y = y;
+    this.text = text;
+    this.color = color();
+}
+
+const color = () => {
+    let r = Math.floor(Math.random() * (256));
+    let g = Math.floor(Math.random() * (256));
+    let b = Math.floor(Math.random() * (256));
+    let colorNote = '#' + r.toString(16) + g.toString(16) + b.toString(16);
+    return colorNote;
+}
 
 export const boardTop = () => {
-
-    if (localStorage.getItem('notes')) {
-        notesArr = JSON.parse(localStorage.getItem('notes'));
-    }
-
-    function Note(x=50, y=100, text) {
-        this.x = x;
-        this.y = y;
-        this.text = text;
-        this.color = color();
-    }
-
-    const color = () => {
-        let r = Math.floor(Math.random() * (256));
-        let g = Math.floor(Math.random() * (256));
-        let b = Math.floor(Math.random() * (256));
-        let colorNote = '#' + r.toString(16) + g.toString(16) + b.toString(16);
-        return colorNote;
-    }
-
     let board = document.createElement('div');
     let addFun = document.createElement('div');
     addFun.style.margin = 10 + 'px';
@@ -75,6 +73,7 @@ export const boardTop = () => {
                     localStorage.setItem('notes', JSON.stringify(notesArr));
                     renderHTML();
                 } else {
+                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', answer);
                     text = answer.result[0].value;
                     notesArr.push(new Note(text));
                     localStorage.setItem('notes', JSON.stringify(notesArr));
@@ -85,6 +84,8 @@ export const boardTop = () => {
 
     buttonRemoveAll.onclick = (e) => {
         notesArr = [];
+        localStorage.setItem('notes', JSON.stringify(notesArr));
+        renderHTML();
     }
 }
 
@@ -97,7 +98,7 @@ noteDiv.style.borderColor = 'red';
 
 document.body.appendChild(noteDiv);
 
-const renderHTML = () => {
+export const renderHTML = () => {
     noteDiv.innerHTML = '';
     notesArr.map(function (item, index) {
         var newNote = createOneNoteMarkup(item);
@@ -264,4 +265,12 @@ function createOneNoteMarkup(object) {
 
 
     return tempNote;
+}
+
+// функция для перемещения одной заметки
+function stickToMouse(e) {
+    dragNote.style.left = (e.pageX - deltaX) + 'px';
+    dragNote.style.top = (e.pageY - deltaY) + 'px';
+    dragObj.x = e.pageX - deltaX;
+    dragObj.y = e.pageY - deltaY;
 }
