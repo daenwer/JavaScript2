@@ -1,0 +1,78 @@
+.button {
+    margin: 5px;
+}
+
+
+/*body {*/
+/*    !*background: linear-gradient(to left, #fefcea, #f1da36);*!*/
+/*    background-image: url("../images/1234.png");*/
+/*    !*background-position: center;*!*/
+/*    !*background-size: contain;*!*/
+/*    !*width: 50%;*!*/
+/*    !*height: 50%;*!*/
+/*}*/
+
+.note {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    /*background: #e2e6ea;*/
+    background: #e2e6ea;
+    cursor: pointer ;
+    border-width: 2px;
+    border-color: #c8cbcf;
+    border-style: solid;
+}
+
+.fixed {
+    position: fixed;
+    background: green;
+    top: 0;
+}
+
+.deleteButton {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.textButton {
+    right: 35px;
+    width: 45px;
+}
+
+.noteTextDiv {
+    overflow: auto;
+    height: 130px;
+    background-color: #fefcea;
+    margin: 10px;
+    padding: 10px;
+    border-width: 1px;
+    border-color: #c8cbcf;
+    border-style: solid;
+}
+
+.noteTextArea {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 16px;
+    overflow: auto;
+    width: 152px;
+    height: 120px;
+    background-color: #fefcea;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.noteTextParagraph {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 16px;
+    overflow: auto;
+    overflow-y: hidden;
+    white-space: pre-wrap;
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 158px;
+    height: 120px;
+}
