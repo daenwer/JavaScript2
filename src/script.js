@@ -168,43 +168,34 @@ function createOneNoteMarkup(object) {
 
     tempNote.appendChild(noteTextDiv);
 
-    // // кнопка удаления заметки
-    // var deleteButton = document.createElement('button');
-    // deleteButton.textContent = '-';
-    // // deleteButton.classList.add('deleteButton');
-    // deleteButton.classList.add('btn');
-    // tempNote.appendChild(deleteButton);
-    //
-    // // нажатие на кнопку удаления заметки
-    // deleteButton.onclick = function (e) {
-    //     notesArr.splice(dragIndex, 1);
-    //     localStorage.setItem('notes', JSON.stringify(notesArr));
-    //     renderHTML();
-    // }
-
-    // кнопка добавления текста в заметку
+    // кнопка изменения текста в заметку
     var addTextButton = document.createElement('button');
     // addTextButton.classList.add('deleteButton');
     addTextButton.classList.add('btn');
-    addTextButton.style.width = 80 + 'px';
+    addTextButton.style.width = 100 + 'px';
+    addTextButton.style.marginRight = 3 + 'px';
+
 
     // addTextButton.style.right = 35 + 'px';
     // addTextButton.style.width = 45 + 'px';
     addTextButton.textContent = 'change';
     tempNote.appendChild(addTextButton);
 
-    // нажатие на кнопку добавления текста в заметку
+    // нажатие на кнопку изменения текста в заметке
     addTextButton.onclick = function (e) {
         noteTextParagraph.ondblclick();
+
         addTextButton.style.display = 'none';
+        deleteButton.style.display = 'none';
         saveTextButton.style.display = 'initial';
 
     }
 
     // кнопка сохранения текста в заметку
     var saveTextButton = document.createElement('button');
-    saveTextButton.classList.add('deleteButton');
-    saveTextButton.classList.add('textButton');
+    // saveTextButton.classList.add('deleteButton');
+    saveTextButton.classList.add('btn');
+    saveTextButton.style.width = 100 + 'px';
     saveTextButton.textContent = 'save';
     saveTextButton.style.display = 'none';
     tempNote.appendChild(saveTextButton);
@@ -221,6 +212,7 @@ function createOneNoteMarkup(object) {
     deleteButton.textContent = '-';
     // deleteButton.classList.add('deleteButton');
     deleteButton.classList.add('btn');
+    deleteButton.style.marginLeft = 2 + 'px';
     tempNote.appendChild(deleteButton);
 
     // нажатие на кнопку удаления заметки
