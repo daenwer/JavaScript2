@@ -9,6 +9,7 @@ if (localStorage.getItem('notes')) {
     notesArr = JSON.parse(localStorage.getItem('notes'));
 }
 
+// создание заметки
 function Note(text) {
     this.x = 10;
     this.y = 70;
@@ -16,6 +17,7 @@ function Note(text) {
     this.color = color();
 }
 
+// рандомный цвет заметки
 const color = () => {
     let r = Math.floor(Math.random() * (256));
     let g = Math.floor(Math.random() * (256));
@@ -24,6 +26,7 @@ const color = () => {
     return colorNote;
 }
 
+// отрисовка верха страницы
 export const boardTop = () => {
     let board = document.createElement('div');
     let addFun = document.createElement('div');
@@ -96,11 +99,12 @@ noteDiv.style.borderColor = 'red';
 
 document.body.appendChild(noteDiv);
 
+// отрисовка тела страницы
 export const renderHTML = () => {
     noteDiv.innerHTML = '';
-    notesArr.map(function (item, index) {
-        var newNote = createOneNoteMarkup(item);
-        newNote.onmousedown = function (e) {
+    notesArr.map((item, index) => {
+        let newNote = createOneNoteMarkup(item);
+        newNote.onmousedown = (e) => {
             window.addEventListener('mousemove', stickToMouse);
             deltaX = e.pageX - newNote.offsetLeft;
             deltaY = e.pageY - newNote.offsetTop;
@@ -109,7 +113,7 @@ export const renderHTML = () => {
             dragIndex = index;
         }
 
-        newNote.onmouseup = function (e) {
+        newNote.onmouseup = (e) => {
             localStorage.setItem('notes', JSON.stringify(notesArr));
             window.removeEventListener('mousemove', stickToMouse);
         }
@@ -120,29 +124,29 @@ export const renderHTML = () => {
 
 }
 
-function createOneNoteMarkup(object) {
-    var tempNote = document.createElement('div');
+const createOneNoteMarkup = (object) => {
+    let tempNote = document.createElement('div');
     tempNote.classList.add('note');
     tempNote.style.background = object.color;
 
     tempNote.style.left = object.x + 'px';
     tempNote.style.top = object.y + 'px';
 
-    var noteTextDiv = document.createElement('div');
+    let noteTextDiv = document.createElement('div');
     noteTextDiv.classList.add('noteTextDiv');
 
-    var noteTextParagraph = document.createElement('pre');
+    let noteTextParagraph = document.createElement('pre');
     noteTextParagraph.classList.add('noteTextParagraph');
     noteTextParagraph.textContent = object.text;
 
-    var noteTextArea = document.createElement('textarea');
+    let noteTextArea = document.createElement('textarea');
     noteTextArea.classList.add('noteTextArea');
     noteTextArea.style.display = 'none';
     noteTextArea.textContent = object.text;
 
 
     // клик по замметке для переключеиня в textarea
-    noteTextParagraph.ondblclick = function (e) {
+    noteTextParagraph.ondblclick = (e) => {
         noteTextParagraph.style.display = 'none';
         noteTextArea.style.display = 'initial';
         // обработка кнопок text - save
@@ -151,7 +155,7 @@ function createOneNoteMarkup(object) {
     }
 
     // клик по заметке для переключеиня в paragraph
-    noteTextArea.ondblclick = function (e) {
+    noteTextArea.ondblclick = (e) => {
         dragObj.text = noteTextArea.value;
         localStorage.setItem('notes', JSON.stringify(notesArr));
         noteTextArea.style.display = 'none';
@@ -169,22 +173,16 @@ function createOneNoteMarkup(object) {
     tempNote.appendChild(noteTextDiv);
 
     // кнопка изменения текста в заметку
-    var addTextButton = document.createElement('button');
-    // addTextButton.classList.add('deleteButton');
+    let addTextButton = document.createElement('button');
     addTextButton.classList.add('btn');
     addTextButton.style.width = 100 + 'px';
     addTextButton.style.marginRight = 3 + 'px';
-
-
-    // addTextButton.style.right = 35 + 'px';
-    // addTextButton.style.width = 45 + 'px';
     addTextButton.textContent = 'change';
     tempNote.appendChild(addTextButton);
 
     // нажатие на кнопку изменения текста в заметке
-    addTextButton.onclick = function (e) {
+    addTextButton.onclick = (e) => {
         noteTextParagraph.ondblclick();
-
         addTextButton.style.display = 'none';
         deleteButton.style.display = 'none';
         saveTextButton.style.display = 'initial';
@@ -192,8 +190,7 @@ function createOneNoteMarkup(object) {
     }
 
     // кнопка сохранения текста в заметку
-    var saveTextButton = document.createElement('button');
-    // saveTextButton.classList.add('deleteButton');
+    let saveTextButton = document.createElement('button');
     saveTextButton.classList.add('btn');
     saveTextButton.style.width = 100 + 'px';
     saveTextButton.textContent = 'save';
@@ -201,22 +198,21 @@ function createOneNoteMarkup(object) {
     tempNote.appendChild(saveTextButton);
 
     // нажатие на кнопку сохранения текста в заметку
-    saveTextButton.onclick = function (e) {
+    saveTextButton.onclick = (e) => {
         noteTextArea.ondblclick();
         saveTextButton.style.display = 'none';
         addTextButton.style.display = 'initial';
     }
 
     // кнопка удаления заметки
-    var deleteButton = document.createElement('button');
+    let deleteButton = document.createElement('button');
     deleteButton.textContent = '-';
-    // deleteButton.classList.add('deleteButton');
     deleteButton.classList.add('btn');
     deleteButton.style.marginLeft = 2 + 'px';
     tempNote.appendChild(deleteButton);
 
     // нажатие на кнопку удаления заметки
-    deleteButton.onclick = function (e) {
+    deleteButton.onclick = (e) => {
         notesArr.splice(dragIndex, 1);
         localStorage.setItem('notes', JSON.stringify(notesArr));
         renderHTML();
@@ -226,7 +222,7 @@ function createOneNoteMarkup(object) {
 }
 
 // функция для перемещения одной заметки
-function stickToMouse(e) {
+const stickToMouse = (e) => {
     dragNote.style.left = (e.pageX - deltaX) + 'px';
     dragNote.style.top = (e.pageY - deltaY) + 'px';
     dragObj.x = e.pageX - deltaX;
