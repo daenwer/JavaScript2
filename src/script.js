@@ -9,9 +9,9 @@ if (localStorage.getItem('notes')) {
     notesArr = JSON.parse(localStorage.getItem('notes'));
 }
 
-function Note(x=50, y=100, text) {
-    this.x = x;
-    this.y = y;
+function Note(text) {
+    this.x = 10;
+    this.y = 70;
     this.text = text;
     this.color = color();
 }
@@ -47,6 +47,7 @@ export const boardTop = () => {
     inputFun.style.width = 500 + 'px';
     inputFun.style.display = 'initial';
     inputFun.style.margin = 5 + 'px';
+    inputFun.id = 'funs';
 
     document.body.appendChild(board);
     board.appendChild(addFun);
@@ -55,14 +56,13 @@ export const boardTop = () => {
     addFun.appendChild(inputFun);
 
     buttonAddFun.onclick = (e) => {
-        let inputText = document.getElementsByTagName('input');
+        let inputText = document.getElementById('funs');
         let url = '';
-        if (inputText[0].value.length > 1) {
-            url = 'https://api.chucknorris.io/jokes/search?query=' + inputText[0].value;
+        if (inputText.value.length > 1) {
+            url = 'https://api.chucknorris.io/jokes/search?query=' + inputText.value;
         } else {
             url = 'https://api.chucknorris.io/jokes/random'
         }
-
         let text = '';
         fetch(url)
             .then(response => response.json())
@@ -73,7 +73,6 @@ export const boardTop = () => {
                     localStorage.setItem('notes', JSON.stringify(notesArr));
                     renderHTML();
                 } else {
-                    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', answer);
                     text = answer.result[0].value;
                     notesArr.push(new Note(text));
                     localStorage.setItem('notes', JSON.stringify(notesArr));
@@ -91,7 +90,6 @@ export const boardTop = () => {
 
 let noteDiv = document.createElement('div');
 noteDiv.style.margin = 0;
-noteDiv.style.marginTop = 70 + 'px';
 noteDiv.style.border = 2 + 'px';
 noteDiv.style.borderColor = 'red';
 
@@ -170,26 +168,29 @@ function createOneNoteMarkup(object) {
 
     tempNote.appendChild(noteTextDiv);
 
-    // кнопка удаления заметки
-    var deleteButton = document.createElement('button');
-    deleteButton.classList.add('deleteButton');
-    deleteButton.textContent = '-';
-    tempNote.appendChild(deleteButton);
-
-    // нажатие на кнопку удаления заметки
-    deleteButton.onclick = function (e) {
-        notesArr.splice(dragIndex, 1);
-        localStorage.setItem('notes', JSON.stringify(notesArr));
-        renderHTML();
-    }
+    // // кнопка удаления заметки
+    // var deleteButton = document.createElement('button');
+    // deleteButton.textContent = '-';
+    // // deleteButton.classList.add('deleteButton');
+    // deleteButton.classList.add('btn');
+    // tempNote.appendChild(deleteButton);
+    //
+    // // нажатие на кнопку удаления заметки
+    // deleteButton.onclick = function (e) {
+    //     notesArr.splice(dragIndex, 1);
+    //     localStorage.setItem('notes', JSON.stringify(notesArr));
+    //     renderHTML();
+    // }
 
     // кнопка добавления текста в заметку
     var addTextButton = document.createElement('button');
-    addTextButton.classList.add('deleteButton');
-    addTextButton.classList.add('textButton');
+    // addTextButton.classList.add('deleteButton');
+    addTextButton.classList.add('btn');
+    addTextButton.style.width = 80 + 'px';
+
     // addTextButton.style.right = 35 + 'px';
     // addTextButton.style.width = 45 + 'px';
-    addTextButton.textContent = 'text';
+    addTextButton.textContent = 'change';
     tempNote.appendChild(addTextButton);
 
     // нажатие на кнопку добавления текста в заметку
@@ -215,54 +216,19 @@ function createOneNoteMarkup(object) {
         addTextButton.style.display = 'initial';
     }
 
+    // кнопка удаления заметки
+    var deleteButton = document.createElement('button');
+    deleteButton.textContent = '-';
+    // deleteButton.classList.add('deleteButton');
+    deleteButton.classList.add('btn');
+    tempNote.appendChild(deleteButton);
 
-    // добавляем радио кнопку в заметку для выбора цвета
-    var checkbox = document.createElement('form');
-    checkbox.style.marginLeft = 5 + 'px';
-    var input1 = document.createElement('input');
-    var input2 = document.createElement('input');
-    var input3 = document.createElement('input');
-
-    input1.name = 'dzen';
-    input2.name = 'dzen';
-    input3.name = 'dzen';
-
-    input1.type = 'radio';
-    if (object.check === '1') {
-        input1.checked = 'true';
-    }
-    input2.type = 'radio';
-    if (object.check === '2') {
-        input2.checked = 'true';
-    }
-    input3.type = 'radio';
-    if (object.check === '3') {
-        input3.checked = 'true';
-    }
-    // обрабатываем радиокнопки
-    input1.onclick = function (e) {
-        tempNote.style.background = '#e2e6ea';
-        dragObj.color = '#e2e6ea';
-        dragObj.check = '1';
+    // нажатие на кнопку удаления заметки
+    deleteButton.onclick = function (e) {
+        notesArr.splice(dragIndex, 1);
         localStorage.setItem('notes', JSON.stringify(notesArr));
+        renderHTML();
     }
-    input2.onclick = function (e) {
-        tempNote.style.background = 'yellow';
-        dragObj.color = 'yellow';
-        dragObj.check = '2';
-        localStorage.setItem('notes', JSON.stringify(notesArr));
-    }
-    input3.onclick = function (e) {
-        tempNote.style.background = 'blue';
-        dragObj.color = 'blue';
-        dragObj.check = '3';
-        localStorage.setItem('notes', JSON.stringify(notesArr));
-    }
-    checkbox.appendChild(input1);
-    checkbox.appendChild(input2);
-    checkbox.appendChild(input3);
-    tempNote.appendChild(checkbox);
-
 
     return tempNote;
 }
