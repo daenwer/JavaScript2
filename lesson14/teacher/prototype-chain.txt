@@ -1,0 +1,21 @@
+var object = {};
+object.walk();
+walk ищется в -> В конструкторе -> Object.prototype -> null
+
+var child = new Child();
+child.walk();
+walk ищется в -> В конструкторе -> Child.prototype -> Object.prototype -> null
+
+var teenager = new Teenager();
+teenager.walk();
+walk ищется в -> В конструкторе -> Teenager.prototype -> Object.prototype -> null
+
+var teenager = new Teenager(); // и Teenager унаследован от Child
+teenager.walk() -> В конструкторе -> Teenager.prototype -> Child.prototype -> Object.prototype -> null
+
+var person = new Person();
+person.walk();
+walk ищется в -> В конструкторе -> Person.prototype -> Object.prototype -> null
+
+var person = new Person(); // и Person унаследован от Teenager, а он от Child
+person.getSecret() -> В конструкторе -> Person.prototype -> Teenager.prototype -> Child.prototype -> Object.prototype -> null
