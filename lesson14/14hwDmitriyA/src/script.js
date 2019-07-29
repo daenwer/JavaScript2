@@ -1,6 +1,22 @@
 // import {renderHTML} from "../../../lesson13/13hwDmitriyA/src/script";
 
-export const renderHTML = () => {
+let notesArr = [];
+let deltaX;
+let deltaY;
+// let dragNote;
+// let dragObj;
+// let dragIndex;
+
+if (localStorage.getItem('freedom')) {
+    notesArr = JSON.parse(localStorage.getItem('freedom'));
+} else {
+    notesArr = {
+        // x = 20,
+        // y = 20.
+    }
+}
+
+const renderHTML = () => {
     noteDiv.innerHTML = '';
     notesArr.map((item, index) => {
         let newNote = createOneNoteMarkup(item);
