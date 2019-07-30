@@ -9,3 +9,4 @@ import './/styles/styles.css';
 import {start} from "./script";
 
 start();
+
