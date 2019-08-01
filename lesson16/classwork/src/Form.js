@@ -19,7 +19,7 @@ class Form extends React.Component {
 
         const {name, value} = e.target;
         this.setState({[name]: value});
-
+        
         // this.setState({ [e.target.nackCount] : e.target.value });
     }
 
