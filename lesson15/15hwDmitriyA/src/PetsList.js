@@ -6,9 +6,7 @@ function PetsList() {
     return (
         <>
             <ul className="list">
-
                 <Petltem/>
-
             </ul>
         </>
     );
