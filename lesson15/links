@@ -1,7 +1,13 @@
-ООП: наследование (на основе прототипов), инкапсуляция (на основе замыканий), полиморфизм
-Цепочки прототипов и особенности наследования в JS.
+npm install react react-dom @babel/preset-react
 
-https://mzl.la/2mZ2rEU ООП в JS
+"@babel/preset-react": "^7.0.0",
+"react": "^16.8.6",
+"react-dom": "^16.8.6",
 
-Оператор new: http://learn.javascript.ru/constructor-new
-Основы ООП: http://learn.javascript.ru/oop (разделы 1-3)
+
+Что обсуждали:
+Пару задач по замыкания (closure) и каррирование
+Путь от чистого JS к React, понятие компоненты, props.
+
+Полезные ссылочки:
+https://ru.reactjs.org/docs/hello-world.html что может быть лучше офф. документации
