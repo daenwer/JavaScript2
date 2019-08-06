@@ -3,6 +3,7 @@ import React from 'react';
 import Form from './Form';
 import Settings from './Settings';
 import List from './List';
+import Posts from "./Posts";
 
 class App extends React.Component {
   constructor(props) {
@@ -81,6 +82,8 @@ class App extends React.Component {
         <Form addPerson={this.addPerson} />
         <Settings liftData={this.liftData} />
         <List persons={copy} removePerson={this.removePerson} />
+
+        <Posts />
       </div>
     )
   }
