@@ -4,7 +4,7 @@ function Item(props) {
   return (
     <li>
       {props.fio} {props.age}
-      <button onClick={() => { props.removePerson(props.index) }}>Удалить</button>
+      <button onClick={() => { props.removePerson(props.id) }}>Удалить</button>
     </li>
   )
 }

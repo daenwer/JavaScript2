@@ -7,8 +7,8 @@ function List(props) {
   
   return (
     <ul>
-      {persons.map((person, index) => (
-        <Item key={index} index={index} {...person} removePerson={props.removePerson} />
+      {persons.map(person => (
+        <Item key={person.id} {...person} removePerson={props.removePerson} />
       ))}
     </ul>
   )
