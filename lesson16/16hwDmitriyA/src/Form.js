@@ -1,8 +1,17 @@
 import React from 'react';
 
-export let animals = [];
 
-class Animal{
+export let animals = [
+    {
+        name: 'Jaasdfasdfck',
+        owner: 'Lukaasdfasdfs',
+        date: '13.01.2018',
+        time: '15:00',
+        content: 'Dog',
+    },
+];
+
+class Animal {
     constructor(name, owner, date, time, content) {
         this.name = name;
         this.owner = owner;
@@ -19,6 +28,7 @@ class Form extends React.Component {
         super(props);
 
         this.state = {
+            data: [],
             name: '',
             owner: '',
             date: '',
@@ -37,6 +47,7 @@ class Form extends React.Component {
 
     handleSubmit(e) {
 
+        this.state.data.push()
         animals.push(new Animal(
             this.state.name,
             this.state.owner,
@@ -48,7 +59,6 @@ class Form extends React.Component {
 
         e.preventDefault();
         console.log(animals);
-
     }
 
 

@@ -2,6 +2,7 @@ import React from 'react';
 
 import PetItem from './PetItem';
 
+import Form from './Form';
 // import animals from './Form';
 
 // let arr = animals;
@@ -31,7 +32,7 @@ const arr = [
 
 function PetsList() {
 
-  console.log(arr);
+  console.log('animals = ', Form.animals);
 
   return (
     <ul className="list">
