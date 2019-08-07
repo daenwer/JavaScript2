@@ -1,34 +1,12 @@
 import React from 'react';
 
 
-export let animals = [
-    {
-        name: 'Jaasdfasdfck',
-        owner: 'Lukaasdfasdfs',
-        date: '13.01.2018',
-        time: '15:00',
-        content: 'Dog',
-    },
-];
-
-class Animal {
-    constructor(name, owner, date, time, content) {
-        this.name = name;
-        this.owner = owner;
-        this.date = date;
-        this.time = time;
-        this.content = content;
-    }
-}
-
-
 class Form extends React.Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            data: [],
             name: '',
             owner: '',
             date: '',
@@ -42,29 +20,20 @@ class Form extends React.Component {
 
     handleChange(e) {
         const {name, value} = e.target;
-        this.setState({[name]: value});
+        this.setState({ [name]: value });
     }
 
     handleSubmit(e) {
-
-        this.state.data.push()
-        animals.push(new Animal(
-            this.state.name,
-            this.state.owner,
-            this.state.date,
-            this.state.time,
-            this.state.content
-            )
-        );
-
         e.preventDefault();
-        console.log(animals);
+        const { name, owner, date, time, content } = this.state;
+        const animal = { name, owner, date, time, content };
+        this.props.addAnimal(animal);
+        e.target.reset();
     }
-
 
     render() {
         return (
-            <form>
+            <form onSubmit={this.handleSubmit}>
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">Имя животного</label>
                     <div className="col-sm-10">
@@ -96,15 +65,14 @@ class Form extends React.Component {
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label">Заметки</label>
                     <div className="col-sm-10">
-                        <textarea placeholder="Заметки" className="form-control"
-                                  name="content" onChange={this.handleChange}></textarea>
+                        <textarea placeholder="Заметки" className="form-control" name="content" onChange={this.handleChange} ></textarea>
                     </div>
                 </div>
                 <div className="form-group row">
                     <label className="col-sm-2 col-form-label"></label>
                     <div className="col-sm-10">
                         <input type="submit" className="btn btn-primary"
-                               value="Добавить" onClick={this.handleSubmit}/>
+                               value="Добавить"/>
                     </div>
                 </div>
             </form>
@@ -113,4 +81,3 @@ class Form extends React.Component {
 }
 
 export default Form;
-// export default animals
