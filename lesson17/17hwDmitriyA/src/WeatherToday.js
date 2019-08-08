@@ -2,37 +2,27 @@ import React from 'react';
 
 function WeatherToday(props) {
 
-    const weatherToday = props.weathers;
-    // alert(JSON.stringify(weatherToday, null, 4));
+    let data = {};
 
-    let temp = 'VVVVVVVV';
-
-    if (props.weathers) {
-        console.log('AAAAAAAAAAAAAAAAAAAA');
-        console.log(String(props.weathers.dateTime));
-        let temp = String(props.weathers.temp);
-        console.log(temp);
-        // let temp = String(props.weathers.temp);
-
-        // let { dateTime, temp, weatherDescriptions, weatherIcon, windDeg, windSpeed } = props.weathers;
-        // let temp = props.weathers.temp;
+    if (!props.weathers) {
+        return (
+            <div>Loading...</div>
+        )
     } else {
-        console.log('BBBBBBBBBBBBBBBBBBBB');
-        let temp = 'VVVVVVVV'
-        // let dateTime = 'AAAAAA';
-        // let temp = 'BBBBBBBBB';
-        // let weatherDescriptions = 'CCCCCCCCCCC';
-        // let weatherIcon = 'EEEEEEEEEEEE';
-        // let windDeg = 'FFFFFFFFFFF';
-        // let windSpeed ='GGGGGGGGGGG';
+        data = props.weathers;
     }
 
     return (
         <ul className="list">
             <div>
                 <li>
-                    { JSON.stringify(props.weathers, null, 4) }
-                    {/*{ [...props.weathers] }*/}
+                    {data.dateTime}
+                    {data.time}
+                    {data.temp}
+                    {data.weatherDescriptions}
+                    {data.weatherIcon}
+                    {data.windDeg}
+                    {data.windSpeed}
                 </li>
             </div>
             {/*{animals.map(animal => (*/}

@@ -30,7 +30,7 @@ class WeatherApp extends React.Component {
 
     getData(object, num) {
         let result = {};
-        result['id'] = num;
+        // result['id'] = num;
         result['dateTime'] = object.list[num]['dt_txt'];
         // result['time'] = object.list[num]['dt_txt'].split(' ')[1];
         result['temp'] = (object.list[num].main.temp-273.15).toFixed(2);
@@ -47,6 +47,7 @@ class WeatherApp extends React.Component {
             <div className="container pt-3">
                 <div className="row">
                     <div className="col-3 offset-4">
+                        Hello
                         <WeatherToday weathers={this.state.weathers[0]}/>
                         {/*<WeaterOther weathers={this.state.weathers}/>*/}
                     </div>

@@ -1,0 +1,9 @@
+монтаж ---------------
+constructor(props) (инициализация, создание базового стейта, биндинг методов)
+getDerivedStateFromProps(nextProps, prevState) например для встраивания данных из стейт в пропсы 
+render() отрисовка JSX
+componentDidMount() компонента вмонирована в DOM - запуск таймеров, счетчиков, запуск ajax запросов  , side-эффекты
+
+Материалы
+https://habr.com/ru/post/256965/ Виртуальный дом
+https://reactjs.org/docs/faq-ajax.html напоминание где использовать ajax
