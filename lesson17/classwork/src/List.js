@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Item from './Item';
+import PetItem from './PetItem';
 
 function List(props) {
   const persons = props.persons;
@@ -8,7 +8,7 @@ function List(props) {
   return (
     <ul>
       {persons.map(person => (
-        <Item key={person.id} {...person} removePerson={props.removePerson} />
+        <PetItem key={person.id} {...person} removePerson={props.removePerson} />
       ))}
     </ul>
   )

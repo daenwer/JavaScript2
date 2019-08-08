@@ -39,7 +39,7 @@ import List from './List';
 
 // ReactDOM.render(divReact, root);
 
-// function Item(props) {
+// function WeatherItem(props) {
 //     // console.log(props);
 //
 //     return (
@@ -50,17 +50,17 @@ import List from './List';
 //     );
 // }
 
-// let school = Item();
+// let school = WeatherItem();
 // ReactDOM.render(school, root);
 
-// {/*<Item />*/}
-// {/*ReactDOM.render(<Item />, root);*/}
+// {/*<WeatherItem />*/}
+// {/*ReactDOM.render(<WeatherItem />, root);*/}
 
 // let schools = (
 //     <div>
-//         <Item name='Myfreedom' text='Школа №1'/>
-//         <Item name='Belhard' text='Школа №2'/>
-//         <Item name='Шаг' text='Школа №3'/>
+//         <WeatherItem name='Myfreedom' text='Школа №1'/>
+//         <WeatherItem name='Belhard' text='Школа №2'/>
+//         <WeatherItem name='Шаг' text='Школа №3'/>
 //     </div>
 // );
 // ReactDOM.render(schools, root);

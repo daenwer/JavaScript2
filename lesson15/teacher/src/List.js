@@ -43,7 +43,7 @@ function List() {
   return (
     <div>
       {schoolsData.map(school => (
-          <Item key={school.id} name={school.name} text={school.text} />
+          <WeatherItem key={school.id} name={school.name} text={school.text} />
       ))}
     </div>
   );
@@ -57,7 +57,7 @@ function List() {
 function List() {
   return (
     <div>
-      {schoolsData.map(school => <Item key={school.id} name={school.name} text={school.text} />)}
+      {schoolsData.map(school => <WeatherItem key={school.id} name={school.name} text={school.text} />)}
     </div>
   );
 }
@@ -68,7 +68,7 @@ function List() {
 // аналог 3
 
 function List() {
-  const list = schoolsData.map(school => <Item key={school.id} name={school.name} text={school.text} />);
+  const list = schoolsData.map(school => <WeatherItem key={school.id} name={school.name} text={school.text} />);
   
   return (
     <div>

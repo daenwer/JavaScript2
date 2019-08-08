@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Item(props) {
+function PetItem(props) {
   return (
     <li>
       {props.fio} {props.age}
@@ -9,4 +9,4 @@ function Item(props) {
   )
 }
 
-export default Item;
+export default PetItem;
