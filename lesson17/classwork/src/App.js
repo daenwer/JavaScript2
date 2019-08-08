@@ -33,11 +33,7 @@ class App extends React.Component {
   }
 
   removePerson(id) {
-    // const copy = [...this.state.persons];
-    // const index = copy.findIndex(person => person.id === id);
-    // copy.splice(index, 1);
-
-    const copy = this.state.persons.filter(
+     const copy = this.state.persons.filter(
         person => person.id !== id
     );
 
@@ -45,18 +41,12 @@ class App extends React.Component {
   }
 
   liftData(name, value) {
-    console.log(name, value, 'смотрим в компоненте App');
-
     this.setState({ [name]: value });
   }
 
   render() {
-    console.log(this.state);
-
     const { search, sort } = this.state;
-
     let copy = [ ...this.state.persons ];
-
     if (search) {
       copy = copy.filter(person => person.fio.toLowerCase().includes(search.toLowerCase()));
     }
@@ -82,7 +72,6 @@ class App extends React.Component {
         <Form addPerson={this.addPerson} />
         <Settings liftData={this.liftData} />
         <List persons={copy} removePerson={this.removePerson} />
-
         <Posts />
       </div>
     )

@@ -10,22 +10,7 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            animals: [
-                {
-                    name: 'Cat',
-                    owner: 'Vasya',
-                    date: '13.01.2018',
-                    time: '15:00',
-                    content: 'Beautiful cat',
-                },
-                {
-                    name: 'Dog',
-                    owner: 'Masha',
-                    date: '10.10.2015',
-                    time: '13:00',
-                    content: 'Mad dog',
-                },
-            ],
+            animals: [],
             uniqueId: 1,
             search: '',
             sort: 'no',
@@ -37,10 +22,6 @@ class App extends React.Component {
     }
 
     addAnimal(animal) {
-
-        console.log(this.state.animals);
-        console.log(animal);
-
         const copyAnimal = {...animal, id: this.state.uniqueId};
         const copy = [...this.state.animals, copyAnimal];
         this.setState({animals: copy, uniqueId: this.state.uniqueId + 1});
@@ -56,14 +37,12 @@ class App extends React.Component {
     }
 
     liftData(name, value) {
-        this.setState({[name]: value});
+        this.setState({ [name]: value });
     }
 
     render() {
         const { search, sort } = this.state;
-
         let copy = [ ...this.state.animals ];
-
         if (search) {
             copy = copy.filter(animal => animal.name.toLowerCase().includes(search.toLowerCase()));
         }
