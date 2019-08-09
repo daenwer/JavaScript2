@@ -10,7 +10,10 @@ class WeatherApp extends React.Component {
         super(props);
 
         this.state = {
-            weathers: []
+            weathers: [],
+            city: '',
+            country: '',
+            uniqueId: 1,
         };
     }
 
@@ -20,11 +23,17 @@ class WeatherApp extends React.Component {
             .then(response => response.json())
             .then(data => {
                 let resultData = [];
+
+                const city = data.city.name;
+                const country = data.city.country;
+
+
                 for (let i=0; i < 40; i += 8) {
                     resultData.push(this.getData(data, i));
                 }
-                this.setState({weathers: resultData});
-                console.log(resultData);
+                this.setState({weathers: resultData, city: city, country: country});
+
+
             })
     }
 
@@ -38,18 +47,19 @@ class WeatherApp extends React.Component {
         result['weatherIcon'] = object.list[num].weather[0].icon;
         result['windDeg'] = object.list[num].wind.deg;
         result['windSpeed'] = object.list[num].wind.speed;
+        this.setState({uniqueId: this.state.uniqueId + 1});
+        result['id'] = this.state.uniqueId;
         return result;
     }
 
     render() {
-
+        // console.log(this.state);
         return (
             <div className="container pt-3">
                 <div className="row">
-                    <div className="col-3 offset-4">
-                        Hello
-                        <WeatherToday weathers={this.state.weathers[0]}/>
-                        {/*<WeaterOther weathers={this.state.weathers}/>*/}
+                    <div className="col-3 offset-4 weatherapp">
+                        <WeatherToday weathers={this.state.weathers[0]} city={this.state.city} country={this.state.country}/>
+                        <WeaterOther weathers={this.state.weathers}/>
                     </div>
                 </div>
             </div>

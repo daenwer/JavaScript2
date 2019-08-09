@@ -4,22 +4,26 @@ import WeatherItem from './WeatherItem';
 
 function WeaterOther(props) {
 
-  // const weathers = props.weathers;
+    const weathers = props.weathers;
 
-  return (
-      <div>
-        <p>Hello111111111</p>
-        {/*<p>{String(props.weathers)}</p>*/}
-        <p>Сам хело</p>
-    <ul className="list">
-      {/*{weathers.map(weather => (*/}
-      {/*    <WeatherItem {...weather}/>*/}
-      {/*))}*/}
+    weathers.map(weather => {
+        console.log({...weather})
+    })
 
-    </ul>
-      </div>
+    return (
+        <div className="weatherother">
+            <ul className="list">
 
-  )
+                {weathers.map(weather => (
+                    //<WeatherItem {...weather}/>
+                    <WeatherItem key={weather.id} {...weather}/>
+                ))}
+
+
+            </ul>
+        </div>
+
+    )
 }
 
 export default WeaterOther;
