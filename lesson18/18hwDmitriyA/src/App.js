@@ -30,16 +30,20 @@ class App extends React.Component {
 
     pageClick(e) {
 
-        const domNode = ReactDOM.findDOMNode(this);
-        // const domNode = findDOMNode(this);
-
-        // if (e.toElement == 123) {console.log(111)}
-        if ((!domNode || !domNode.contains(event.target))) {
-            console.log('Все заехоршо!')
+        // const domNode = ReactDOM.findDOMNode(this);
+        // // const domNode = findDOMNode(this);
+        //
+        // // if (e.toElement == 123) {console.log(111)}
+        // if ((!domNode || !domNode.contains(event.target))) {
+        //     console.log('Все заехоршо!')
+        // } else {
+        //     console.log('Не очень!!!')
+        // }
+        if (e.element === window) {
+            console.log('HHHHHHHHHHHHHHHHHHHHHHHHH')
         } else {
-            console.log('Не очень!!!')
+        console.log('Hello!!!!!!!!!!!')
         }
-
 
     }
 

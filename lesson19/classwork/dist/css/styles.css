@@ -1,0 +1,42 @@
+.list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.weatherapp {
+  /*height: 550px;*/
+  background: #dae0e5;
+  border: 1px solid black;
+  padding: 1px;
+}
+
+.weathertoday {
+  height: 230px;
+  background: #20c997;
+  border: 1px solid black;
+  margin-bottom: 1px;
+}
+
+.weatherother {
+  /*height: 275px;*/
+  /*background: #20c997;*/
+  /*border: 1px solid black;*/
+}
+
+.weatheritem {
+  border: 1px solid black;
+  margin-bottom: 1px;
+  /*display: inline;*/
+}
+
+.span1 {
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+.span2 {
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
