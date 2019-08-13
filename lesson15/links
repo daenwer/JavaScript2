@@ -17,7 +17,7 @@ https://ru.reactjs.org/docs/hello-world.html что может быть лучш
 
 Примерный план
 
-Разработать Главную компоненту WeatherApptherApp.js. Экспортируем ее и подключаем к выходному index.js. WeatherApp будет рендерить JSX
+Разработать Главную компоненту WeatherApptherApp.js. Экспортируем ее и подключаем к выходному index.js. App будет рендерить JSX
 <div>
 <WeatherToday />
 <Settings />

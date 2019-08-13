@@ -41,7 +41,7 @@ class Form extends React.Component {
     // 3 сложить их в объект
     const person = { fio, age };
 
-    // 4 запушить в массив (метод пришел снаружи (из компоненты WeatherApp))
+    // 4 запушить в массив (метод пришел снаружи (из компоненты App))
     this.props.addPerson(person);
 
     // 5 очистить форму
