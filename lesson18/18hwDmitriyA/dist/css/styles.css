@@ -1,42 +1,50 @@
-.list {
-  list-style: none;
-  padding-left: 0;
-  margin-bottom: 0;
+.square {
+  padding-top: 8px;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: red;
+  text-align: center;
 }
-
-/*.weatherapp {*/
-/*  !*height: 550px;*!*/
-/*  background: #dae0e5;*/
-/*  border: 1px solid black;*/
-/*  padding: 1px;*/
-/*}*/
-
-/*.weathertoday {*/
-/*  height: 230px;*/
-/*  background: #20c997;*/
-/*  border: 1px solid black;*/
-/*  margin-bottom: 1px;*/
-/*}*/
-
-/*.weatherother {*/
-/*  !*height: 275px;*!*/
-/*  !*background: #20c997;*!*/
-/*  !*border: 1px solid black;*!*/
-/*}*/
-
-/*.weatheritem {*/
-/*  border: 1px solid black;*/
-/*  margin-bottom: 1px;*/
-/*  !*display: inline;*!*/
-/*}*/
-
-/*.span1 {*/
-/*  margin-left: 10px;*/
-/*  margin-right: 20px;*/
-/*}*/
-
-/*.span2 {*/
-/*  margin-left: 20px;*/
-/*  margin-right: 10px;*/
-/*}*/
-
+.circle {
+  padding-top: 8px;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: red;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  text-align: center;
+}
+.parallelogram {
+  padding-top: 5px;
+  position: absolute;
+  width: 50px;
+  height: 35px;
+  -webkit-transform: skew(20deg);
+  -moz-transform: skew(20deg);
+  -o-transform: skew(20deg);
+  background: red;
+  text-align: center;
+}
+.rhombus {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 25px solid transparent;
+  border-bottom-color: red;
+  top: -25px;
+  text-align: center;
+}
+.rhombus:after {
+  content: "";
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: -25px;
+  top: 25px;
+  border: 25px solid transparent;
+  border-top-color: red;
+  text-align: center;
+}

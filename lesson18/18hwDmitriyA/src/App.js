@@ -1,110 +1,116 @@
 import React from 'react';
 
 import Button from './Button';
+import Shape from "./Shape";
 
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            arrFigure: [],
+            arrShape: [],
+            widthWindow: innerWidth,
+            heightWindow: innerHeight,
+            uniqueId: 1,
+            addShape: false,
         };
         this.remove = this.remove.bind(this);
-        this.changeColor = this.changeColor.bind(this);
+        this.selectionColor = this.selectionColor.bind(this);
+        this.selectionShape = this.selectionShape.bind(this);
+        this.create = this.create.bind(this);
+        this.autoAddShapes = this.autoAddShapes.bind(this);
     }
 
-    remove() {
-        this.setState({arrFigure: []});
-        console.log(this.state)
+    remove(e) {
+        e.stopPropagation();
+        // TODO: почитать что это
+        // e.nativeEvent.stopImmediatePropagation();
+        this.setState({arrShape: []});
     }
 
-    changeColor() {
-        this.setState({arrFigure: [1, 2, 3]});
-        console.log(this.state)
-    }
+    autoAddShapes(e) {
+        e.stopPropagation();
+        const start = !this.state.addShape;
+        this.setState({addShape: start});
 
-    componentDidMount() {
-        window.addEventListener('mousedown', this.pageClick, false);
-        // window.addEventListener('mousedown', this.hand, false);
-    }
+        const addShapes = setInterval(() => {
+            e.pageX = Math.floor(Math.random() * (this.state.widthWindow - 80)) + 40;
+            e.pageY = Math.floor(Math.random() * (this.state.heightWindow - 160)) + 80;
+            this.create(e)}, 3000);
 
-    pageClick(e) {
+        if (start) {
+            console.log('start!!!!!!!!!!!!!!!')
 
-        // const domNode = ReactDOM.findDOMNode(this);
-        // // const domNode = findDOMNode(this);
-        //
-        // // if (e.toElement == 123) {console.log(111)}
-        // if ((!domNode || !domNode.contains(event.target))) {
-        //     console.log('Все заехоршо!')
-        // } else {
-        //     console.log('Не очень!!!')
-        // }
-        if (e.element === window) {
-            console.log('HHHHHHHHHHHHHHHHHHHHHHHHH')
+
+            addShapes();
+            //
+            // const newShape = function () {
+            //     console.log('lalalalal');
+            //     // e.pageX = Math.floor(Math.random() * (this.state.widthWindow - 80)) + 40;
+            //     // e.pageY = Math.floor(Math.random() * (this.state.heightWindow - 160)) + 80;
+            //     // this.create(e);
+            // };
+            // setInterval(newShape, 1000);
+            // интервал
+            // рандомный выбор координат
+            // создание фигуры
+
         } else {
-        console.log('Hello!!!!!!!!!!!')
+            console.log('stop!!!!!!!!!!')
+            clearInterval(addShapes());
         }
-
     }
 
-    // // document.documentElement.onclick = function(e) {
-    // handleClick {
-    //     const mouseX = e.clientX;
-    //     const mouseY = e.clientY;
-    //
-    //     if (mouseX <= wWidth / 2 && mouseY <= wHeight / 2) {
-    //         console.log("1й сектор");
-    //     } else if (mouseX > wWidth / 2 && mouseY <= wHeight / 2) {
-    //         console.log("2й сектор");
-    //     } else if (mouseX <= wWidth / 2 && mouseY > wHeight / 2) {
-    //         console.log("3й сектор");
-    //     } else {
-    //         console.log("4й сектор");
-    //     }
-    // }
+    //TODO: может быть статическим методом
+    selectionColor() {
+        const randomColor = 'rgb(' + Math.floor(Math.random() * (256)) + ',' +
+            Math.floor(Math.random() * (256)) + ',' +
+            Math.floor(Math.random() * (256)) + ')';
+        return randomColor;
+    }
 
+    selectionShape(x, y) {
+        console.log('addShape');
+        const xMouse = x;
+        const yMouse = y;
+        const widthWindow = this.state.widthWindow;
+        const heightWindow = this.state.heightWindow;
+        if (xMouse >= widthWindow / 2 && yMouse >= heightWindow / 2) {        // Низ-лево
+            return 'rhombus';
+        } else if (xMouse >= widthWindow / 2 && yMouse <= heightWindow / 2) { // Верх - лево
+            return 'square';
+        } else if (xMouse < widthWindow / 2 && yMouse > heightWindow / 2) {   // Низ - право
+            return 'parallelogram';
+        } else {                                                              // Верх - право
+            return 'circle';
+        }
+    }
 
-    // componentDidMount() {
-    //     const url = 'http://api.openweathermap.org/data/2.5/forecast?q=Minsk,by&APPID=b98b606e9fb1832fd8ccdf53758978fc';
-    //     fetch(url)
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             let resultData = [];
-    //
-    //             const city = data.city.name;
-    //             const country = data.city.country;
-    //
-    //             for (let i=0; i < 40; i += 8) {
-    //                 resultData.push(this.getData(data, i));
-    //             }
-    //             this.setState({weathers: resultData, city: city, country: country});
-    //         })
-    // }
-    //
-    // getData(object, num) {
-    //     let result = {};
-    //     result['dateTime'] = object.list[num]['dt_txt'].slice(5, 16);
-    //     result['time'] = object.list[num]['dt_txt'].split(' ')[1];
-    //     result['temp'] = (object.list[num].main.temp-273.15).toFixed(0);
-    //     result['weatherDescriptions'] = object.list[num].weather[0].main;
-    //     result['weatherIcon'] = object.list[num].weather[0].icon;
-    //     result['windDeg'] = object.list[num].wind.deg;
-    //     result['windSpeed'] = object.list[num].wind.speed;
-    //     this.setState({uniqueId: this.state.uniqueId + 1});
-    //     result['id'] = this.state.uniqueId;
-    //     return result;
-    // }
+    create(e) {
+        const shape = {};
+        const x = e.pageX;
+        const y = e.pageY;
+        // TODO: добавить проверку на расстояние до края экрана
+        shape['x'] = x;
+        shape['y'] = y;
+        shape['class'] = this.selectionShape(x, y);
+        this.setState({uniqueId: this.state.uniqueId + 1});
+        shape['id'] = this.state.uniqueId;
+        shape['color'] = this.selectionColor();
+        shape['blinking'] = false;
+        let newArrShape = this.state.arrShape.slice();
+        newArrShape.push(shape);
+        this.setState({arrShape: newArrShape});
+    }
 
     render() {
+        console.log(this.state.arrShape);
         return (
-            <div>
-                <Button remove={this.remove} changeColor={this.changeColor}/>
-
-                {/*<div className="col-3 offset-4 weatherapp">*/}
-                {/*    <WeatherToday weathers={this.state.weathers[0]} city={this.state.city} country={this.state.country}/>*/}
-                {/*    <WeaterOther weathers={this.state.weathers}/>*/}
-                {/*</div>*/}
-
+            <div style={{height: '100vh'}} onClick={this.create}>
+                <Button remove={this.remove} autoAddShapes={this.autoAddShapes}/>
+                {this.state.arrShape.map(shape => (
+                    <Shape key={shape.id} {...shape}/>
+                ))}
             </div>
         )
     }

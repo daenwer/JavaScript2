@@ -1,6 +1,6 @@
 import React from 'react';
 
-import WeatherItem from './WeatherItem';
+import Shape from './Shape';
 
 function WeaterOther(props) {
 
@@ -10,7 +10,7 @@ function WeaterOther(props) {
         <div className="weatherother">
             <ul className="list">
                 {weathers.map(weather => (
-                    <WeatherItem key={weather.id} {...weather}/>
+                    <Shape key={weather.id} {...weather}/>
                 ))}
             </ul>
         </div>
