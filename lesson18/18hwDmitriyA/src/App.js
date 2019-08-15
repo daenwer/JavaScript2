@@ -18,7 +18,6 @@ class App extends React.Component {
         this.selectionColor = this.selectionColor.bind(this);
         this.selectionShape = this.selectionShape.bind(this);
         this.create = this.create.bind(this);
-        this.autoAddShapes = this.autoAddShapes.bind(this);
     }
 
     remove(e) {
@@ -26,39 +25,6 @@ class App extends React.Component {
         // TODO: почитать что это
         // e.nativeEvent.stopImmediatePropagation();
         this.setState({arrShape: []});
-    }
-
-    autoAddShapes(e) {
-        e.stopPropagation();
-        const start = !this.state.addShape;
-        this.setState({addShape: start});
-
-        const addShapes = setInterval(() => {
-            e.pageX = Math.floor(Math.random() * (this.state.widthWindow - 80)) + 40;
-            e.pageY = Math.floor(Math.random() * (this.state.heightWindow - 160)) + 80;
-            this.create(e)}, 3000);
-
-        if (start) {
-            console.log('start!!!!!!!!!!!!!!!')
-
-
-            addShapes();
-            //
-            // const newShape = function () {
-            //     console.log('lalalalal');
-            //     // e.pageX = Math.floor(Math.random() * (this.state.widthWindow - 80)) + 40;
-            //     // e.pageY = Math.floor(Math.random() * (this.state.heightWindow - 160)) + 80;
-            //     // this.create(e);
-            // };
-            // setInterval(newShape, 1000);
-            // интервал
-            // рандомный выбор координат
-            // создание фигуры
-
-        } else {
-            console.log('stop!!!!!!!!!!')
-            clearInterval(addShapes());
-        }
     }
 
     //TODO: может быть статическим методом
@@ -86,10 +52,18 @@ class App extends React.Component {
         }
     }
 
-    create(e) {
+    create(e, xMouse=null, yMouse=null) {
+
         const shape = {};
-        const x = e.pageX;
-        const y = e.pageY;
+        let x = null;
+        let y = null;
+        if (xMouse && yMouse) {
+            x = xMouse;
+            y = yMouse;
+        } else {
+            x = e.pageX;
+            y = e.pageY;
+        }
         // TODO: добавить проверку на расстояние до края экрана
         shape['x'] = x;
         shape['y'] = y;
@@ -107,7 +81,9 @@ class App extends React.Component {
         console.log(this.state.arrShape);
         return (
             <div style={{height: '100vh'}} onClick={this.create}>
-                <Button remove={this.remove} autoAddShapes={this.autoAddShapes}/>
+            {/*<div style={{height: '100vh'}}>*/}
+                <Button remove={this.remove} autoAddShapes={this.autoAddShape} create={this.create}
+                        widthWindow={this.state.widthWindow} heightWindow={this.state.heightWindow}/>
                 {this.state.arrShape.map(shape => (
                     <Shape key={shape.id} {...shape}/>
                 ))}
