@@ -1,0 +1,21 @@
+https://api.imgflip.com/get_memes
+
+
+npm install @babel/polyfill
+npm i @babel/polyfill
+
+webpack.config.js вместо 5й строчки:
+entry: ['@babel/polyfill', "./src/index.js"],
+
+
+
+для создание
+https://api.imgflip.com/caption_image
+
+{
+  template_id: айдиМема,
+  username: "g_user_107257642549096835361",
+  password: "1234",
+  text0: текстПервогоПоля,
+  text1: текстВторогоПоля
+}
