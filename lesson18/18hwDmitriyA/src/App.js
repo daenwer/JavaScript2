@@ -2,6 +2,7 @@ import React from 'react';
 
 import Button from './Button';
 import Shape from "./Shape";
+import {selectionColor} from "./Sandbox"
 
 
 class App extends React.Component {
@@ -11,13 +12,28 @@ class App extends React.Component {
             arrShape: [],
             widthWindow: innerWidth,
             heightWindow: innerHeight,
-            uniqueId: 1,
+            uniqueId: 0,
             addShape: false,
         };
         this.remove = this.remove.bind(this);
-        this.selectionColor = this.selectionColor.bind(this);
+        // this.selectionColor = this.selectionColor.bind(this);
         this.selectionShape = this.selectionShape.bind(this);
         this.create = this.create.bind(this);
+        this.changeColor = this.changeColor.bind(this);
+    }
+
+    changeColor(id) {
+        const idShape = id;
+        console.log('idShape = ', idShape);
+        const newColor = selectionColor();
+        let newArrShape = this.state.arrShape.slice();
+        newArrShape.forEach(function (item, id) {
+
+            if (id === idShape) {
+                item.color = newColor;
+            }
+        });
+        this.setState({arrShape: newArrShape})
     }
 
     remove(e) {
@@ -27,14 +43,6 @@ class App extends React.Component {
         this.setState({arrShape: []});
     }
 
-    //TODO: может быть статическим методом
-    selectionColor() {
-        const randomColor = 'rgb(' + Math.floor(Math.random() * (256)) + ',' +
-            Math.floor(Math.random() * (256)) + ',' +
-            Math.floor(Math.random() * (256)) + ')';
-        return randomColor;
-    }
-
     selectionShape(x, y) {
         console.log('addShape');
         const xMouse = x;
@@ -42,7 +50,7 @@ class App extends React.Component {
         const widthWindow = this.state.widthWindow;
         const heightWindow = this.state.heightWindow;
         if (xMouse >= widthWindow / 2 && yMouse >= heightWindow / 2) {        // Низ-лево
-            return 'rhombus';
+            return 'oval';
         } else if (xMouse >= widthWindow / 2 && yMouse <= heightWindow / 2) { // Верх - лево
             return 'square';
         } else if (xMouse < widthWindow / 2 && yMouse > heightWindow / 2) {   // Низ - право
@@ -70,7 +78,7 @@ class App extends React.Component {
         shape['class'] = this.selectionShape(x, y);
         this.setState({uniqueId: this.state.uniqueId + 1});
         shape['id'] = this.state.uniqueId;
-        shape['color'] = this.selectionColor();
+        shape['color'] = selectionColor();
         shape['blinking'] = false;
         let newArrShape = this.state.arrShape.slice();
         newArrShape.push(shape);
@@ -81,11 +89,10 @@ class App extends React.Component {
         console.log(this.state.arrShape);
         return (
             <div style={{height: '100vh'}} onClick={this.create}>
-            {/*<div style={{height: '100vh'}}>*/}
-                <Button remove={this.remove} autoAddShapes={this.autoAddShape} create={this.create}
+                <Button remove={this.remove} create={this.create}
                         widthWindow={this.state.widthWindow} heightWindow={this.state.heightWindow}/>
                 {this.state.arrShape.map(shape => (
-                    <Shape key={shape.id} {...shape}/>
+                    <Shape key={shape.id} {...shape} changeColor={this.changeColor}/>
                 ))}
             </div>
         )

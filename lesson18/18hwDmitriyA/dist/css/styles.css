@@ -28,23 +28,13 @@
   background: red;
   text-align: center;
 }
-.rhombus {
+.oval {
+  padding-top: 4px;
   position: absolute;
-  width: 0;
-  height: 0;
-  border: 25px solid transparent;
-  border-bottom-color: red;
-  top: -25px;
+  width: 60px;
+  height: 30px;
+  background: red;
+  border-radius: 30px / 15px;
   text-align: center;
 }
-.rhombus:after {
-  content: "";
-  width: 0;
-  height: 0;
-  position: absolute;
-  left: -25px;
-  top: 25px;
-  border: 25px solid transparent;
-  border-top-color: red;
-  text-align: center;
-}
+
